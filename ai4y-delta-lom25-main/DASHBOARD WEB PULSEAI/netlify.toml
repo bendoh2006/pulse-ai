@@ -1,0 +1,100 @@
+[build]
+  # Script de build pour copier les fichiers JS
+  command = "chmod +x build.sh && ./build.sh"
+  publish = "public"
+  
+[build.environment]
+  NODE_VERSION = "18"
+
+# Redirection de correction pour les URLs contenant /public (Erreur Supabase fréquente)
+# On tente d'abord une redirection propre (301)
+[[redirects]]
+  from = "/public/*"
+  to = "/:splat"
+  status = 301
+  force = true
+
+# Ceinture et bretelles : Si la redirection échoue ou si le navigateur insiste,
+# on sert les fichiers correctement même avec le préfixe /public
+[[redirects]]
+  from = "/public/src/*"
+  to = "/src/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/public/*.css"
+  to = "/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/public/*.js"
+  to = "/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/src/*"
+  to = "/src/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*.css"
+  to = "/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*.js"
+  to = "/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+  
+[[redirects]]
+  from = "/admin"
+  to = "/admin.html"
+  status = 200
+  
+[[redirects]]
+  from = "/dashboard"
+  to = "/dashboard.html"
+  status = 200
+  
+[[redirects]]
+  from = "/profile"
+  to = "/profile.html"
+  status = 200
+  
+[[redirects]]
+  from = "/hospitals"
+  to = "/hospitals.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(self), microphone=(), camera=()"
+    
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, immutable"
+    
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, immutable"
+    
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

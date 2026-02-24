@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - PulseAI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #198754;
+            --sidebar-width: 260px;
+            --header-height: 60px;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+            transition: all 0.3s;
+        }
+
+        /* SIDEBAR COLLAPSED STATE */
+        body.sidebar-collapsed .sidebar {
+            margin-left: calc(var(--sidebar-width) * -1);
+        }
+        body.sidebar-collapsed .main-content {
+            margin-left: 0;
+        }
+        body.sidebar-collapsed .top-header {
+            left: 0;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .sidebar-header {
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            padding: 0 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-link {
+            color: rgba(255,255,255,0.7);
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: white;
+            background: rgba(255,255,255,0.05);
+            border-left-color: var(--primary-color);
+        }
+
+        .nav-link i {
+            font-size: 1.1rem;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding-top: var(--header-height);
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+        .top-header {
+            height: var(--header-height);
+            background: white;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: var(--sidebar-width);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        /* CARDS */
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            transition: transform 0.2s;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .bg-soft-primary { background: rgba(13, 110, 253, 0.1); color: var(--primary-color); }
+        .bg-soft-success { background: rgba(25, 135, 84, 0.1); color: var(--secondary-color); }
+        .bg-soft-warning { background: rgba(255, 193, 7, 0.1); color: #ffc107; }
+
+        /* SECTIONS */
+        .content-section {
+            display: none;
+            padding: 2rem;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* SERVICE CARD */
+        .service-card {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .service-card:hover {
+            border-color: var(--primary-color);
+            background-color: #f8faff;
+        }
+
+        /* LOADING */
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LOADING OVERLAY -->
+    <div id="loading-overlay">
+        <div class="spinner-border text-primary mb-3" role="status"></div>
+        <h5 class="text-muted">Chargement de votre espace...</h5>
+    </div>
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <a href="#" class="sidebar-brand">
+                <i class="bi bi-heart-pulse-fill text-primary"></i>
+                PulseAI
+            </a>
+        </div>
+        <div class="d-flex flex-column py-3">
+            <a href="#" class="nav-link active" data-target="home">
+                <i class="bi bi-grid-1x2-fill"></i> Accueil
+            </a>
+            <a href="#" class="nav-link" data-target="services">
+                <i class="bi bi-activity"></i> Services
+            </a>
+            <a href="#" class="nav-link" data-target="equipments">
+                <i class="bi bi-box-seam"></i> Équipements
+            </a>
+            <a href="#" class="nav-link" data-target="patients">
+                <i class="bi bi-people"></i> Patients
+            </a>
+            <a href="#" class="nav-link" data-target="settings">
+                <i class="bi bi-gear"></i> Paramètres
+            </a>
+            <div class="mt-auto border-top border-secondary pt-3 mx-3">
+                <a href="#" class="nav-link text-danger px-0" id="btnLogout">
+                    <i class="bi bi-box-arrow-right"></i> Déconnexion
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header class="top-header">
+        <div class="d-flex align-items-center gap-3">
+            <button id="sidebarToggle" class="btn btn-link text-dark p-0 border-0 me-2">
+                <i class="bi bi-list fs-4"></i>
+            </button>
+            <h5 class="m-0 fw-bold text-secondary" id="pageTitle">Tableau de bord</h5>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+            <div class="dropdown">
+                <button class="btn btn-light rounded-circle position-relative" type="button">
+                    <i class="bi bi-bell"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
+                </button>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <div class="text-end d-none d-sm-block">
+                    <div class="fw-bold small" id="headerUserName">Chargement...</div>
+                    <div class="text-muted" style="font-size: 0.75rem;">Administrateur</div>
+                </div>
+                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                    <i class="bi bi-person-fill"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        
+        <!-- SECTION: ACCUEIL -->
+        <div id="home" class="content-section active">
+            <div class="row g-4 mb-4">
+                <div class="col-md-8">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h4 class="card-title mb-4">Bienvenue, <span id="hospitalNameDisplay">...</span></h4>
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-start gap-3">
+                                        <div class="bg-light p-2 rounded">
+                                            <i class="bi bi-geo-alt text-primary fs-4"></i>
+                                        </div>
+                                        <div>
+                                            <small class="text-muted d-block">Adresse</small>
+                                            <span class="fw-medium" id="hospitalAddress">...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-start gap-3">
+                                        <div class="bg-light p-2 rounded">
+                                            <i class="bi bi-telephone text-success fs-4"></i>
+                                        </div>
+                                        <div>
+                                            <small class="text-muted d-block">Téléphone</small>
+                                            <span class="fw-medium" id="hospitalPhone">...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100 bg-primary text-white">
+                        <div class="card-body p-4 d-flex flex-column justify-content-between">
+                            <div>
+                                <h5 class="card-title opacity-75">Statut</h5>
+                                <h2 class="display-6 fw-bold mb-0" id="hospitalStatus">En ligne</h2>
+                            </div>
+                            <div class="mt-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>Complétude du profil</span>
+                                    <span class="fw-bold">85%</span>
+                                </div>
+                                <div class="progress bg-white bg-opacity-25" style="height: 6px;">
+                                    <div class="progress-bar bg-white" role="progressbar" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h5 class="mb-3 fw-bold text-secondary">Aperçu rapide</h5>
+            <div class="row g-4">
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-soft-primary">
+                            <i class="bi bi-activity"></i>
+                        </div>
+                        <h3 class="fw-bold mb-1" id="statServices">0</h3>
+                        <p class="text-muted small mb-0">Services Actifs</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-soft-success">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <h3 class="fw-bold mb-1" id="statDoctors">0</h3>
+                        <p class="text-muted small mb-0">Médecins Disponibles</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-soft-warning">
+                            <i class="bi bi-box-seam"></i>
+                        </div>
+                        <h3 class="fw-bold mb-1" id="statEquipments">0</h3>
+                        <p class="text-muted small mb-0">Équipements</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: SERVICES -->
+        <div id="services" class="content-section">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="fw-bold m-0">Gestion des Services</h4>
+                <button class="btn btn-primary" onclick="showAddServiceModal()">
+                    <i class="bi bi-plus-lg me-2"></i>Ajouter un service
+                </button>
+            </div>
+
+            <div class="row g-4" id="servicesGrid">
+                <!-- Les services seront injectés ici par JS -->
+            </div>
+        </div>
+
+        <!-- SECTION: EQUIPMENTS -->
+        <div id="equipments" class="content-section">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="fw-bold m-0">Parc d'Équipements</h4>
+                <button class="btn btn-success" onclick="showAddEquipmentModal()">
+                    <i class="bi bi-plus-lg me-2"></i>Ajouter un équipement
+                </button>
+            </div>
+
+            <div class="card border-0 shadow-sm">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th class="border-0 ps-4">Nom</th>
+                                <th class="border-0">Catégorie</th>
+                                <th class="border-0 text-center">Total</th>
+                                <th class="border-0 text-center">Disponible</th>
+                                <th class="border-0">Statut</th>
+                                <th class="border-0 text-end pe-4">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="equipmentsTableBody">
+                            <!-- Les équipements seront injectés ici -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: PATIENTS -->
+        <div id="patients" class="content-section">
+            <div class="text-center py-5">
+                <div class="bg-light rounded-circle d-inline-flex p-4 mb-3">
+                    <i class="bi bi-people fs-1 text-primary"></i>
+                </div>
+                <h3>Gestion des Patients</h3>
+                <p class="text-muted">Le module de gestion des files d'attente et des dossiers patients est en cours de développement.</p>
+                <button class="btn btn-outline-primary mt-2">En savoir plus</button>
+            </div>
+        </div>
+
+        <!-- SECTION: SETTINGS -->
+        <div id="settings" class="content-section">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <h5 class="card-title mb-4">Paramètres du compte</h5>
+                            <div class="alert alert-info">
+                                <i class="bi bi-info-circle me-2"></i>
+                                Pour modifier ces informations, veuillez contacter le support.
+                            </div>
+                            <form>
+                                <div class="mb-3">
+                                    <label class="form-label">Nom de l'hôpital</label>
+                                    <input type="text" class="form-control" id="settingsName" disabled>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Email administrateur</label>
+                                    <input type="email" class="form-control" id="settingsEmail" disabled>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Téléphone</label>
+                                    <input type="text" class="form-control" id="settingsPhone" disabled>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- MODAL SERVICE DETAILS -->
+    <div class="modal fade" id="serviceDetailsModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Détails du service</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="serviceUpdateForm">
+                        <input type="hidden" id="editServiceId">
+                        <div class="mb-3">
+                            <label class="form-label">Nombre total de médecins</label>
+                            <input type="number" class="form-control" id="editDoctorCount">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Médecins actuellement disponibles</label>
+                            <input type="number" class="form-control" id="editActiveDoctors">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Temps d'attente estimé (min)</label>
+                            <input type="number" class="form-control" id="editWaitingTime">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" onclick="saveServiceDetails()">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ADD SERVICE -->
+    <div class="modal fade" id="addServiceModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajouter un service</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addServiceForm">
+                        <div class="mb-3">
+                            <label class="form-label">Sélectionner un service</label>
+                            <select class="form-select" id="newServiceSelect">
+                                <option value="">Chargement...</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Prix de la consultation (FCFA)</label>
+                            <input type="number" class="form-control" id="newServicePrice" placeholder="Ex: 5000">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" onclick="saveNewService()">Ajouter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ADD EQUIPMENT -->
+    <div class="modal fade" id="addEquipmentModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajouter un équipement</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addEquipmentForm">
+                        <div class="mb-3">
+                            <label class="form-label">Nom de l'équipement</label>
+                            <input type="text" class="form-control" id="newEquipName" placeholder="Ex: Respirateur Artificiel">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Catégorie</label>
+                            <select class="form-select" id="newEquipCategory">
+                                <option value="Lits">Lits & Mobilier</option>
+                                <option value="Imagerie">Imagerie Médicale</option>
+                                <option value="Urgence">Urgence & Réanimation</option>
+                                <option value="Chirurgie">Chirurgie</option>
+                                <option value="Autre">Autre</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <label class="form-label">Quantité Totale</label>
+                                <input type="number" class="form-control" id="newEquipTotal" value="1">
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label class="form-label">Disponible</label>
+                                <input type="number" class="form-control" id="newEquipAvailable" value="1">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Statut</label>
+                            <select class="form-select" id="newEquipStatus">
+                                <option value="operational">Opérationnel</option>
+                                <option value="maintenance">En maintenance</option>
+                                <option value="broken">Hors service</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" onclick="saveNewEquipment()">Ajouter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="/src/dashboard.js?v=8"></script>
+</body>
+</html>

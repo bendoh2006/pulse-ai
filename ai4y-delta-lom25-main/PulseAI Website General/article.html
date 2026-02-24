@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title id="article-title">Article | Pulse AI</title>
+  <meta name="description" content="Lisez les dernières actualités santé de Pulse AI"/>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .article-header {
+      padding: 120px 0 60px;
+      background: linear-gradient(135deg, rgba(59,130,246,0.05) 0%, rgba(255,107,157,0.03) 100%);
+      position: relative;
+    }
+    .article-hero-image {
+      width: 100%;
+      max-width: 900px;
+      height: 450px;
+      border-radius: 24px;
+      object-fit: cover;
+      margin: 0 auto 32px;
+      display: block;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    }
+    .article-meta {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .article-category {
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      color: white;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .article-date {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .article-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+    .article-content h1 {
+      font-size: 42px;
+      line-height: 1.2;
+      margin-bottom: 32px;
+      color: var(--dark);
+      font-weight: 900;
+    }
+    .article-content h2 {
+      font-size: 28px;
+      margin: 40px 0 20px;
+      color: var(--dark);
+      font-weight: 700;
+    }
+    .article-content h3 {
+      font-size: 22px;
+      margin: 32px 0 16px;
+      color: var(--dark);
+      font-weight: 700;
+    }
+    .article-content p {
+      font-size: 18px;
+      line-height: 1.8;
+      margin-bottom: 24px;
+      color: #374151;
+    }
+    .article-content ul, .article-content ol {
+      margin: 20px 0;
+      padding-left: 30px;
+    }
+    .article-content li {
+      margin: 12px 0;
+      font-size: 18px;
+      line-height: 1.8;
+      color: #374151;
+    }
+    .article-content strong {
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .article-actions {
+      max-width: 800px;
+      margin: 60px auto 0;
+      padding: 32px;
+      background: rgba(59,130,246,0.05);
+      border-radius: 20px;
+      text-align: center;
+    }
+    .article-actions h3 {
+      margin-bottom: 16px;
+      color: var(--dark);
+    }
+    .related-articles {
+      padding: 80px 0;
+      background: linear-gradient(0deg, rgba(59,130,246,0.03), transparent);
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 24px;
+      transition: all 0.3s ease;
+    }
+    .back-btn:hover {
+      transform: translateX(-4px);
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span>💙 Pulse AI</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html#features">Fonctionnalités</a>
+        <a href="index.html#news">Actualités</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ARTICLE CONTENT -->
+  <article class="article-header">
+    <div class="container">
+      <a href="index.html#news" class="back-btn">← Retour aux actualités</a>
+      <img id="article-hero-image" class="article-hero-image" src="" alt="">
+      <div class="article-content">
+        <div class="article-meta">
+          <span id="article-category" class="article-category"></span>
+          <time id="article-date" class="article-date"></time>
+        </div>
+        <h1 id="article-heading"></h1>
+        <div id="article-body"></div>
+        
+        <div class="article-actions">
+          <h3>Téléchargez Pulse AI</h3>
+          <p>Accédez à un diagnostic intelligent, trouvez les meilleurs hôpitaux et prenez soin de votre santé.</p>
+          <a href="index.html#download" class="btn btn-primary">Télécharger l'application</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- RELATED ARTICLES -->
+  <section class="related-articles">
+    <div class="container">
+      <h2 class="section-title">Articles similaires</h2>
+      <div class="news-grid" id="related-articles-grid"></div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© 2025 Pulse AI — All rights reserved.</div>
+      <div class="socials">
+        <a href="#" aria-label="Twitter">Twitter</a>
+        <a href="https://www.linkedin.com/company/the-pulseai/" target="_blank" aria-label="LinkedIn">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="articles-data.js"></script>
+  <script>
+    // Get article ID from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const articleId = urlParams.get('id');
+
+    if (articleId && articlesData[articleId]) {
+      const article = articlesData[articleId];
+      
+      // Update page
+      document.getElementById('article-title').textContent = article.title + ' | Pulse AI';
+      document.getElementById('article-hero-image').src = article.image;
+      document.getElementById('article-hero-image').alt = article.title;
+      document.getElementById('article-category').textContent = article.category;
+      document.getElementById('article-date').textContent = article.date;
+      document.getElementById('article-date').setAttribute('datetime', article.datetime);
+      document.getElementById('article-heading').textContent = article.title;
+      document.getElementById('article-body').innerHTML = article.content;
+
+      // Show related articles
+      const relatedGrid = document.getElementById('related-articles-grid');
+      const allArticles = Object.keys(articlesData);
+      const relatedArticles = allArticles.filter(id => id !== articleId).slice(0, 3);
+      
+      relatedArticles.forEach(id => {
+        const related = articlesData[id];
+        const card = document.createElement('article');
+        card.className = 'news-card';
+        card.style.cursor = 'pointer';
+        card.onclick = () => window.location.href = `article.html?id=${id}`;
+        card.innerHTML = `
+          <div class="news-image">
+            <img src="${related.image}" alt="${related.title}">
+            <span class="news-badge">${related.category}</span>
+          </div>
+          <div class="news-content">
+            <time datetime="${related.datetime}">${related.date}</time>
+            <h3>${related.title}</h3>
+            <p>${related.excerpt}</p>
+            <a href="article.html?id=${id}" class="news-link">Lire l'article →</a>
+          </div>
+        `;
+        relatedGrid.appendChild(card);
+      });
+    } else {
+      // Article not found, redirect to home
+      window.location.href = 'index.html#news';
+    }
+  </script>
+</body>
+</html>

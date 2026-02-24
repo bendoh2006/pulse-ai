@@ -1,0 +1,13 @@
+# robots.txt pour Pulse AI
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://pulseai-a0548.web.app/sitemap.xml
+
+# Crawl-delay pour éviter la surcharge
+Crawl-delay: 1
+
+# Bloquer les ressources inutiles pour le SEO
+Disallow: /script.js
+Disallow: /styles.css

@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PULSE AI — AI-Powered Patient Routing for African Healthcare Systems</title>
+    <meta name="description"
+        content="PULSE AI uses Artificial Intelligence to analyze patient symptoms and route them to the right healthcare facility in real time. Built for Africa." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- ═══════════════════ NAVBAR ═══════════════════ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="20" fill="white" fill-opacity="0.15" />
+                        <path d="M6 20h6l4-8 6 16 4-10 3 5h5" stroke="white" stroke-width="2.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <span>PULSE <span class="logo-ai">AI</span></span>
+            </a>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#problem" data-i18n="nav.problem">Problem</a></li>
+                <li><a href="#solution" data-i18n="nav.solution">Solution</a></li>
+                <li><a href="#how-it-works" data-i18n="nav.how">How It Works</a></li>
+                <li><a href="#whatsapp" data-i18n="nav.whatsapp">WhatsApp</a></li>
+                <li><a href="#dashboard" data-i18n="nav.dashboard">Dashboard</a></li>
+                <li><a href="#vision" data-i18n="nav.vision">Vision</a></li>
+            </ul>
+
+            <!-- Controls group: lang + theme + cta -->
+            <div class="nav-controls">
+                <!-- Language switcher -->
+                <div class="lang-switcher" id="langSwitcher" aria-label="Language selector">
+                    <button class="lang-btn active" id="langEN" data-lang="en">EN</button>
+                    <span class="lang-sep">|</span>
+                    <button class="lang-btn" id="langFR" data-lang="fr">FR</button>
+                </div>
+
+                <!-- Theme toggle -->
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <!-- Sun icon (shown in dark mode → click to go light) -->
+                    <span class="theme-icon sun-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5" />
+                            <line x1="12" y1="1" x2="12" y2="3" />
+                            <line x1="12" y1="21" x2="12" y2="23" />
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                            <line x1="1" y1="12" x2="3" y2="12" />
+                            <line x1="21" y1="12" x2="23" y2="12" />
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                        </svg>
+                    </span>
+                    <!-- Moon icon (shown in light mode → click to go dark) -->
+                    <span class="theme-icon moon-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+                        </svg>
+                    </span>
+                </button>
+
+                <div class="nav-actions">
+                    <a href="https://wa.me/your_number" class="btn btn-outline" target="_blank"
+                        data-i18n="nav.chatWA">Chat on WhatsApp</a>
+                    <a href="#hero" class="btn btn-primary" data-i18n="nav.tryPulse">Try PULSE AI</a>
+                </div>
+            </div>
+
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════ HERO ═══════════════════ -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <img src="assets/hero_bg.png" alt="Africa healthcare network" class="hero-bg-img" />
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-particles" id="particles"></div>
+        <div class="container hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                <span data-i18n="hero.badge">Built for Africa · Powered by AI</span>
+            </div>
+            <h1 class="hero-title">
+                <span data-i18n="hero.title1">AI-Powered Patient Routing</span><br />
+                <span class="gradient-text" data-i18n="hero.title2">for African Healthcare Systems</span>
+            </h1>
+            <p class="hero-subtitle">
+                <span data-i18n="hero.sub1">Helping patients reach the right care</span>
+                <strong> <span data-i18n="hero.sub2">before it's too late.</span></strong><br />
+                <span data-i18n="hero.sub3">Intelligent triage, real-time routing, and hospital coordination — at
+                    scale.</span>
+            </p>
+            <div class="hero-ctas">
+                <a href="#how-it-works" class="btn btn-hero-primary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                    <span data-i18n="hero.cta1">Try PULSE AI Web</span>
+                </a>
+                <a href="https://wa.me/your_number" class="btn btn-hero-whatsapp" target="_blank">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                    </svg>
+                    <span data-i18n="hero.cta2">Chat with PULSE AI on WhatsApp</span>
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-num">54</span>
+                    <span class="stat-label" data-i18n="hero.stat1">African Countries</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-num" data-i18n="hero.stat2num">Real-Time</span>
+                    <span class="stat-label" data-i18n="hero.stat2">Hospital Routing</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-num">AI</span>
+                    <span class="stat-label" data-i18n="hero.stat3">Severity Scoring</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span data-i18n="hero.scroll">Scroll to explore</span>
+            <div class="scroll-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M5 12l7 7 7-7" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ PROBLEM ═══════════════════ -->
+    <section class="problem" id="problem">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" data-i18n="problem.tag">The Crisis</span>
+                <h2 data-i18n="problem.title">A Healthcare System in Crisis</h2>
+                <p data-i18n="problem.sub">Every day across Africa, thousands of preventable deaths occur — not because
+                    treatment doesn't exist, but because patients cannot access it in time.</p>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card" data-aos="fade-up">
+                    <div class="problem-icon overcrowded">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                        </svg>
+                    </div>
+                    <h3 data-i18n="problem.card1.title">Overcrowded Hospitals</h3>
+                    <p data-i18n="problem.card1.body">Emergency units are overwhelmed with patients who could be treated
+                        elsewhere, while specialist facilities remain underutilized.</p>
+                </div>
+                <div class="problem-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="problem-icon delayed">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
+                    </div>
+                    <h3 data-i18n="problem.card2.title">Delayed Access to Care</h3>
+                    <p data-i18n="problem.card2.body">Patients travel blindly, unaware of where specialists or available
+                        beds exist — losing precious hours in critical situations.</p>
+                </div>
+                <div class="problem-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="problem-icon deaths">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+                        </svg>
+                    </div>
+                    <h3 data-i18n="problem.card3.title">Preventable Deaths</h3>
+                    <p data-i18n="problem.card3.body">1 in 3 emergency deaths in Africa are linked to delayed care —
+                        tragedies that proper routing and triage systems could prevent.</p>
+                </div>
+                <div class="problem-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="problem-icon coordination">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                            <line x1="8" y1="21" x2="16" y2="21" />
+                            <line x1="12" y1="17" x2="12" y2="21" />
+                        </svg>
+                    </div>
+                    <h3 data-i18n="problem.card4.title">No Real-Time Coordination</h3>
+                    <p data-i18n="problem.card4.body">Hospitals operate in silos with no shared data. Ambulances,
+                        patients, and healthcare workers have no visibility into system-wide capacity.</p>
+                </div>
+            </div>
+            <div class="problem-stat-bar">
+                <div class="pstat">
+                    <div class="pstat-num">~2.5M</div>
+                    <div class="pstat-desc" data-i18n="problem.pstat1">Preventable deaths per year in Sub-Saharan Africa
+                    </div>
+                </div>
+                <div class="pstat">
+                    <div class="pstat-num">6x</div>
+                    <div class="pstat-desc" data-i18n="problem.pstat2">Higher mortality rate when patients miss the
+                        right facility</div>
+                </div>
+                <div class="pstat">
+                    <div class="pstat-num">&lt; 1%</div>
+                    <div class="pstat-desc" data-i18n="problem.pstat3">Of African hospitals have real-time triage
+                        infrastructure</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ SOLUTION ═══════════════════ -->
+    <section class="solution" id="solution">
+        <div class="container">
+            <div class="section-header light">
+                <span class="section-tag" data-i18n="solution.tag">The Solution</span>
+                <h2 data-i18n="solution.title">How PULSE AI Solves This</h2>
+                <p data-i18n="solution.sub">A unified AI-powered platform that intelligently bridges patients and
+                    healthcare resources — in real time.</p>
+            </div>
+            <div class="solution-grid">
+                <div class="solution-card">
+                    <div class="solution-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3" />
+                            <path d="M19.07 4.93A10 10 0 016.93 19.07M4.93 4.93A10 10 0 0019.07 19.07" />
+                            <path d="M12 20v2M12 2v2M20 12h2M2 12h2" />
+                        </svg>
+                    </div>
+                    <h3 data-i18n="solution.card1.title">Intelligent Symptom Analysis</h3>
+                    <p data-i18n="solution.card1.body">PULSE AI uses NLP and clinical reasoning models to interpret
+                        patient-reported symptoms and generate a precise medical profile.</p>
+                    <div class="solution-tag" data-i18n="solution.card1.tag">AI-Powered NLP</div>
+                </div>
+                <div class="solution-card">
+                    <div class="solution-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                        </svg>
+                    </div>
+                    <h3 data-i18n="solution.card2.title">AI Severity Scoring</h3>
+                    <p data-i18n="solution.card2.body">Every case receives a dynamic severity score — from low to
+                        critical — to ensure urgent patients are prioritised and never lost in a queue.</p>
+                    <div class="solution-tag" data-i18n="solution.card2.tag">Triage Intelligence</div>
+                </div>
+                <div class="solution-card">
+                    <div class="solution-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="10" r="3" />
+                            <path d="M12 2a8 8 0 018 8c0 5.25-8 14-8 14S4 15.25 4 10a8 8 0 018-8z" />
+                        </svg>
+                    </div>
+                    <h3 data-i18n="solution.card3.title">Smart Real-Time Routing</h3>
+                    <p data-i18n="solution.card3.body">Our routing engine matches patients to the optimal hospital based
+                        on urgency, proximity, specialist availability, and live bed capacity.</p>
+                    <div class="solution-tag" data-i18n="solution.card3.tag">Dynamic Routing</div>
+                </div>
+                <div class="solution-card">
+                    <div class="solution-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <path d="M3 9h18M9 21V9" />
+                        </svg>
+                    </div>
+                    <h3 data-i18n="solution.card4.title">Resource Optimization</h3>
+                    <p data-i18n="solution.card4.body">By distributing patient load intelligently, PULSE AI reduces
+                        hospital overcrowding and ensures maximum utilization of available resources across a region.
+                    </p>
+                    <div class="solution-tag" data-i18n="solution.card4.tag">Load Balancing</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ HOW IT WORKS ═══════════════════ -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" data-i18n="how.tag">The Process</span>
+                <h2 data-i18n="how.title">How PULSE AI Works</h2>
+                <p data-i18n="how.sub">Three simple steps stand between a patient and life-saving care.</p>
+            </div>
+            <div class="steps-wrapper">
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-num">01</div>
+                        <div class="step-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
+                            </svg>
+                        </div>
+                        <h3 data-i18n="how.step1.title">Enter Symptoms</h3>
+                        <p data-i18n="how.step1.body">Patient or caregiver describes symptoms via our web platform or
+                            WhatsApp chatbot — available in local languages.</p>
+                    </div>
+                    <div class="step-connector">
+                        <svg viewBox="0 0 60 24" fill="none">
+                            <path d="M0 12h50M44 6l10 6-10 6" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div class="step-card active">
+                        <div class="step-num">02</div>
+                        <div class="step-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                            </svg>
+                        </div>
+                        <h3 data-i18n="how.step2.title">AI Analyzes Severity</h3>
+                        <p data-i18n="how.step2.body">Our AI engine processes symptoms, assigns a severity score, and
+                            determines the appropriate level of care required.</p>
+                    </div>
+                    <div class="step-connector">
+                        <svg viewBox="0 0 60 24" fill="none">
+                            <path d="M0 12h50M44 6l10 6-10 6" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-num">03</div>
+                        <div class="step-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="10" r="3" />
+                                <path d="M12 2a8 8 0 018 8c0 5.25-8 14-8 14S4 15.25 4 10a8 8 0 018-8z" />
+                            </svg>
+                        </div>
+                        <h3 data-i18n="how.step3.title">Smart Routing Recommendation</h3>
+                        <p data-i18n="how.step3.body">The platform instantly recommends the best-matched hospital with
+                            directions, estimated wait times, and specialist availability.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Live Triage Demo Card -->
+            <div class="triage-demo">
+                <div class="triage-demo-inner">
+                    <div class="triage-header">
+                        <div class="triage-dot pulse-dot"></div>
+                        <span data-i18n="how.triage.header">PULSE AI · Live Triage Analysis</span>
+                    </div>
+                    <div class="triage-body">
+                        <div class="triage-input">
+                            <div class="triage-label" data-i18n="how.triage.input">Patient Symptoms</div>
+                            <div class="triage-text" id="triageText">"Severe chest pain, difficulty breathing,
+                                sweating..."</div>
+                        </div>
+                        <div class="triage-output">
+                            <div class="severity-badge critical">⚡ <span data-i18n="how.triage.critical">CRITICAL</span>
+                            </div>
+                            <div class="triage-routing">
+                                <div class="routing-item">
+                                    <span class="routing-icon">🏥</span>
+                                    <div>
+                                        <div class="routing-name">Lagos University Teaching Hospital</div>
+                                        <div class="routing-meta">Cardiology · 2 beds · 4.2 km away</div>
+                                    </div>
+                                    <div class="routing-eta">8 min</div>
+                                </div>
+                                <div class="routing-item alt">
+                                    <span class="routing-icon">🏥</span>
+                                    <div>
+                                        <div class="routing-name">St. Nicholas Hospital</div>
+                                        <div class="routing-meta">Emergency · 7 beds · 6.8 km away</div>
+                                    </div>
+                                    <div class="routing-eta">12 min</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ WHATSAPP ═══════════════════ -->
+    <section class="whatsapp-section" id="whatsapp">
+        <div class="container">
+            <div class="whatsapp-grid">
+                <div class="wa-content">
+                    <span class="section-tag" data-i18n="wa.tag">No App Required</span>
+                    <h2><span data-i18n="wa.title1">Accessible via WhatsApp —</span> <span class="gradient-text-green"
+                            data-i18n="wa.title2">Anywhere in Africa</span></h2>
+                    <p data-i18n="wa.sub">Smartphones are everywhere. PULSE AI leverages WhatsApp — the most widely used
+                        messaging platform on the continent — to deliver AI-powered healthcare assistance even in
+                        low-connectivity environments.</p>
+                    <ul class="wa-features">
+                        <li>
+                            <div class="wa-feat-icon">📱</div>
+                            <div><strong data-i18n="wa.feat1.strong">No download required</strong> — <span
+                                    data-i18n="wa.feat1.rest">works on any basic smartphone with WhatsApp</span></div>
+                        </li>
+                        <li>
+                            <div class="wa-feat-icon">🗣️</div>
+                            <div><strong data-i18n="wa.feat2.strong">Multilingual support</strong> — <span
+                                    data-i18n="wa.feat2.rest">Swahili, Hausa, French, Yoruba &amp; more</span></div>
+                        </li>
+                        <li>
+                            <div class="wa-feat-icon">📶</div>
+                            <div><strong data-i18n="wa.feat3.strong">Low-bandwidth optimized</strong> — <span
+                                    data-i18n="wa.feat3.rest">works even with 2G connections</span></div>
+                        </li>
+                        <li>
+                            <div class="wa-feat-icon">⚡</div>
+                            <div><strong data-i18n="wa.feat4.strong">Instant AI triage</strong> — <span
+                                    data-i18n="wa.feat4.rest">get a severity score and hospital recommendation in under
+                                    60 seconds</span></div>
+                        </li>
+                    </ul>
+                    <a href="https://wa.me/your_number" class="btn btn-whatsapp-cta" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                        </svg>
+                        <span data-i18n="wa.cta">Message PULSE AI on WhatsApp</span>
+                    </a>
+                </div>
+                <div class="wa-visual">
+                    <div class="wa-phone-frame">
+                        <img src="assets/whatsapp_preview.png" alt="PULSE AI WhatsApp AI Agent" />
+                        <div class="wa-phone-glow"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ DASHBOARD ═══════════════════ -->
+    <section class="dashboard-section" id="dashboard">
+        <div class="container">
+            <div class="dashboard-grid">
+                <div class="dash-visual">
+                    <div class="dash-frame">
+                        <img src="assets/dashboard_preview.png" alt="PULSE AI Hospital Dashboard" />
+                        <div class="dash-glow"></div>
+                    </div>
+                </div>
+                <div class="dash-content">
+                    <span class="section-tag" data-i18n="dash.tag">For Hospitals</span>
+                    <h2 data-i18n="dash.title">A Real-Time Control Center for Healthcare Facilities</h2>
+                    <p data-i18n="dash.sub">PULSE AI equips hospital administrators and emergency teams with a live
+                        intelligence dashboard — giving them the visibility they need to respond faster and smarter.</p>
+                    <div class="dash-features">
+                        <div class="dash-feat">
+                            <div class="dash-feat-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 data-i18n="dash.feat1.title">Monitor Incoming Patients</h4>
+                                <p data-i18n="dash.feat1.body">See who is en route, their severity score, and estimated
+                                    arrival time in real time.</p>
+                            </div>
+                        </div>
+                        <div class="dash-feat">
+                            <div class="dash-feat-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                                    <path d="M3 9h18M9 21V9" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 data-i18n="dash.feat2.title">View Resource Availability</h4>
+                                <p data-i18n="dash.feat2.body">Live view of bed occupancy, specialist schedules, ICU
+                                    status, and equipment availability.</p>
+                            </div>
+                        </div>
+                        <div class="dash-feat">
+                            <div class="dash-feat-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 data-i18n="dash.feat3.title">Receive Urgent Case Alerts</h4>
+                                <p data-i18n="dash.feat3.body">Automatic push alerts for critical incoming cases — so
+                                    your team can prepare before the patient arrives.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary btn-outline-teal"><span data-i18n="dash.cta">Request Hospital
+                            Access →</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ VISION ═══════════════════ -->
+    <section class="vision" id="vision">
+        <div class="vision-bg"></div>
+        <div class="container vision-content">
+            <div class="vision-icon">
+                <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="30" cy="30" r="30" fill="rgba(255,255,255,0.08)" />
+                    <path d="M10 30h10l6-12 9 24 6-15 4 8h5" stroke="white" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </div>
+            <span class="section-tag light-tag" data-i18n="vision.tag">Our Vision</span>
+            <h2 data-i18n="vision.quote1">"PULSE AI is not just an application —</h2>
+            <h2 class="vision-highlight" data-i18n="vision.quote2">it is an AI-powered healthcare coordination
+                infrastructure built for Africa."</h2>
+            <p class="vision-sub" data-i18n="vision.sub">We believe every patient on this continent deserves access to
+                the right care, at the right time, regardless of geography or income. PULSE AI is our commitment to
+                making that a reality — one routing decision at a time.</p>
+            <div class="vision-milestones">
+                <div class="milestone">
+                    <div class="milestone-icon">🌍</div>
+                    <h4 data-i18n="vision.m1.title">Pan-African Reach</h4>
+                    <p data-i18n="vision.m1.body">Deploy across 10 pilot cities in 5 countries by 2026</p>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-icon">🏥</div>
+                    <h4 data-i18n="vision.m2.title">Hospital Network</h4>
+                    <p data-i18n="vision.m2.body">Partner with 500+ public and private facilities</p>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-icon">❤️</div>
+                    <h4 data-i18n="vision.m3.title">Lives Saved</h4>
+                    <p data-i18n="vision.m3.body">Target 50,000+ lives improved through timely routing</p>
+                </div>
+            </div>
+            <div class="vision-ctas">
+                <a href="https://wa.me/your_number" class="btn btn-hero-whatsapp" target="_blank">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                    </svg>
+                    <span data-i18n="vision.cta1">Start with WhatsApp</span>
+                </a>
+                <a href="#" class="btn btn-outline-white"><span data-i18n="vision.cta2">Partner with Us</span></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ FOOTER ═══════════════════ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="nav-logo footer-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 40 40" fill="none">
+                                <circle cx="20" cy="20" r="20" fill="white" fill-opacity="0.15" />
+                                <path d="M6 20h6l4-8 6 16 4-10 3 5h5" stroke="white" stroke-width="2.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <span>PULSE <span class="logo-ai">AI</span></span>
+                    </a>
+                    <p data-i18n="footer.brand">AI-powered healthcare coordination infrastructure built for Africa.
+                        Routing patients to the right care before it's too late.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h5 data-i18n="footer.col1.title">Product</h5>
+                        <ul>
+                            <li><a href="#how-it-works" data-i18n="footer.col1.l1">How It Works</a></li>
+                            <li><a href="#whatsapp" data-i18n="footer.col1.l2">WhatsApp Agent</a></li>
+                            <li><a href="#dashboard" data-i18n="footer.col1.l3">Hospital Dashboard</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h5 data-i18n="footer.col2.title">Company</h5>
+                        <ul>
+                            <li><a href="#vision" data-i18n="footer.col2.l1">Our Vision</a></li>
+                            <li><a href="#" data-i18n="footer.col2.l2">About Us</a></li>
+                            <li><a href="#" data-i18n="footer.col2.l3">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h5 data-i18n="footer.col3.title">Get Access</h5>
+                        <ul>
+                            <li><a href="https://wa.me/your_number" target="_blank" data-i18n="footer.col3.l1">WhatsApp
+                                    AI</a></li>
+                            <li><a href="#" data-i18n="footer.col3.l2">Web Platform</a></li>
+                            <li><a href="#" data-i18n="footer.col3.l3">Hospital Registration</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer.copy">&copy; 2025 PULSE AI. AI-Powered Healthcare for Africa.</p>
+                <p data-i18n="footer.love">Made with ❤️ for African healthcare systems</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
