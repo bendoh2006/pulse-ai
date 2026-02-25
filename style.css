@@ -1809,3 +1809,237 @@ body {
     padding: 4px 9px;
   }
 }
+
+/* ════════════════════════════════════════
+   LIGHT-ONLY MODE — force light values on :root
+   (dark-mode toggle removed from UI)
+════════════════════════════════════════ */
+:root {
+  --bg-page: #F0F4FA;
+  --bg-section-a: #FFFFFF;
+  --bg-section-b: #F0F4FA;
+  --bg-dark: linear-gradient(135deg, #1A4A8A 0%, #0B6EB5 50%, #008F7E 100%);
+  --bg-vision: linear-gradient(135deg, #1A4A8A 0%, #0B6EB5 40%, #00756A 100%);
+  --bg-footer: #0D1E38;
+  --text-heading: #0A1628;
+  --text-body: #3D5068;
+  --text-muted: #7A90AD;
+  --text-nav: rgba(255, 255, 255, 0.92);
+  --card-bg: #FFFFFF;
+  --card-border: #DDE5F0;
+  --card-bg-alt: rgba(255, 255, 255, 0.18);
+  --card-border-alt: rgba(255, 255, 255, 0.25);
+  --pstat-bg: #FFFFFF;
+  --pstat-sep: #E0E8F4;
+  --off-white: #F0F4FA;
+  --gray-100: #DDE5F0;
+  --gray-300: #B0C4D8;
+  --shadow-sm: 0 2px 12px rgba(11, 110, 181, 0.10);
+  --shadow-md: 0 8px 32px rgba(11, 110, 181, 0.16);
+  --shadow-lg: 0 20px 60px rgba(11, 110, 181, 0.22);
+}
+
+/* hide theme toggle since we removed it from HTML */
+.theme-toggle {
+  display: none !important;
+}
+
+/* ════════════════════════════════════════
+   NAV BUTTONS — new named classes
+════════════════════════════════════════ */
+.btn-nav-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: transparent;
+  color: var(--white);
+  border: 1.5px solid rgba(37, 211, 102, 0.6);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.btn-nav-wa:hover {
+  background: rgba(37, 211, 102, 0.12);
+  border-color: var(--green-wa);
+}
+
+.btn-nav-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--teal) 100%);
+  color: var(--white);
+  border: 1.5px solid transparent;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: var(--transition);
+  box-shadow: 0 4px 16px rgba(11, 110, 181, 0.35);
+}
+
+.btn-nav-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(11, 110, 181, 0.45);
+}
+
+/* ════════════════════════════════════════
+   MOBILE MENU PANEL
+════════════════════════════════════════ */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: rgba(10, 22, 40, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 20px 24px 28px;
+  animation: slideDown 0.25s ease;
+}
+
+.mobile-menu.open {
+  display: flex;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-menu ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+
+.mobile-menu ul li a {
+  display: block;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: var(--transition);
+}
+
+.mobile-menu ul li a:hover {
+  color: var(--white);
+  padding-left: 6px;
+}
+
+.mobile-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobile-ctas .btn-nav-wa,
+.mobile-ctas .btn-nav-primary {
+  justify-content: center;
+  font-size: 0.92rem;
+  padding: 12px 20px;
+}
+
+/* hamburger open state */
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* show hamburger on mobile */
+@media (max-width: 768px) {
+
+  .nav-links,
+  .nav-controls {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-menu {
+    display: none !important;
+  }
+}
+
+/* ════════════════════════════════════════
+   FOOTER CONTACT ROW
+════════════════════════════════════════ */
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.footer-contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  font-size: 0.82rem;
+  transition: var(--transition);
+}
+
+.footer-contact-item:hover {
+  color: var(--white);
+}
+
+/* ════════════════════════════════════════
+   MILESTONE ICONS — now SVG-based
+════════════════════════════════════════ */
+.milestone-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  color: var(--white);
+}
+
+.milestone-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+/* ════════════════════════════════════════
+   WA FEATURE ICONS — SVG version
+════════════════════════════════════════ */
+.wa-feat-icon svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}

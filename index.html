@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
@@ -7,6 +7,9 @@
     <title>PULSE AI — AI-Powered Patient Routing for African Healthcare Systems</title>
     <meta name="description"
         content="PULSE AI uses Artificial Intelligence to analyze patient symptoms and route them to the right healthcare facility in real time. Built for Africa." />
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -40,7 +43,7 @@
                 <li><a href="#vision" data-i18n="nav.vision">Vision</a></li>
             </ul>
 
-            <!-- Controls group: lang + theme + cta -->
+            <!-- Controls group: lang + cta (no theme toggle) -->
             <div class="nav-controls">
                 <!-- Language switcher -->
                 <div class="lang-switcher" id="langSwitcher" aria-label="Language selector">
@@ -49,43 +52,35 @@
                     <button class="lang-btn" id="langFR" data-lang="fr">FR</button>
                 </div>
 
-                <!-- Theme toggle -->
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                    <!-- Sun icon (shown in dark mode → click to go light) -->
-                    <span class="theme-icon sun-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="5" />
-                            <line x1="12" y1="1" x2="12" y2="3" />
-                            <line x1="12" y1="21" x2="12" y2="23" />
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                            <line x1="1" y1="12" x2="3" y2="12" />
-                            <line x1="21" y1="12" x2="23" y2="12" />
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-                        </svg>
-                    </span>
-                    <!-- Moon icon (shown in light mode → click to go dark) -->
-                    <span class="theme-icon moon-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-                        </svg>
-                    </span>
-                </button>
-
                 <div class="nav-actions">
-                    <a href="https://wa.me/22870653191" class="btn btn-outline" target="_blank"
+                    <a href="https://wa.me/22870653191" class="btn btn-nav-wa" target="_blank"
                         data-i18n="nav.chatWA">Chat on WhatsApp</a>
-                    <a href="https://pulseai-a0548.web.app/" class="btn btn-primary" target="_blank"
+                    <a href="https://pulseai-a0548.web.app/" class="btn btn-nav-primary" target="_blank"
                         data-i18n="nav.tryPulse">Try PULSE AI</a>
                 </div>
             </div>
 
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>
+        </div>
+
+        <!-- Mobile menu panel -->
+        <div class="mobile-menu" id="mobileMenu">
+            <ul>
+                <li><a href="#problem" data-i18n="nav.problem">Problem</a></li>
+                <li><a href="#solution" data-i18n="nav.solution">Solution</a></li>
+                <li><a href="#how-it-works" data-i18n="nav.how">How It Works</a></li>
+                <li><a href="#whatsapp" data-i18n="nav.whatsapp">WhatsApp</a></li>
+                <li><a href="#dashboard" data-i18n="nav.dashboard">Dashboard</a></li>
+                <li><a href="#vision" data-i18n="nav.vision">Vision</a></li>
+            </ul>
+            <div class="mobile-ctas">
+                <a href="https://wa.me/22870653191" class="btn btn-nav-wa" target="_blank" data-i18n="nav.chatWA">Chat
+                    on WhatsApp</a>
+                <a href="https://pulseai-a0548.web.app/" class="btn btn-nav-primary" target="_blank"
+                    data-i18n="nav.tryPulse">Try PULSE AI</a>
+            </div>
         </div>
     </nav>
 
@@ -114,13 +109,13 @@
             <div class="hero-ctas">
                 <a href="https://pulseai-a0548.web.app/" class="btn btn-hero-primary" target="_blank">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
+                        stroke-linejoin="round" width="18" height="18">
                         <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
                     <span data-i18n="hero.cta1">Try PULSE AI Web</span>
                 </a>
                 <a href="https://wa.me/22870653191" class="btn btn-hero-whatsapp" target="_blank">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
                         <path
                             d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
                     </svg>
@@ -419,44 +414,8 @@
                     </div>
                 </div>
             </div>
-            <!-- Live Triage Demo Card -->
-            <div class="triage-demo">
-                <div class="triage-demo-inner">
-                    <div class="triage-header">
-                        <div class="triage-dot pulse-dot"></div>
-                        <span data-i18n="how.triage.header">PULSE AI · Live Triage Analysis</span>
-                    </div>
-                    <div class="triage-body">
-                        <div class="triage-input">
-                            <div class="triage-label" data-i18n="how.triage.input">Patient Symptoms</div>
-                            <div class="triage-text" id="triageText">"Severe chest pain, difficulty breathing,
-                                sweating..."</div>
-                        </div>
-                        <div class="triage-output">
-                            <div class="severity-badge critical">⚡ <span data-i18n="how.triage.critical">CRITICAL</span>
-                            </div>
-                            <div class="triage-routing">
-                                <div class="routing-item">
-                                    <span class="routing-icon">🏥</span>
-                                    <div>
-                                        <div class="routing-name">Lagos University Teaching Hospital</div>
-                                        <div class="routing-meta">Cardiology · 2 beds · 4.2 km away</div>
-                                    </div>
-                                    <div class="routing-eta">8 min</div>
-                                </div>
-                                <div class="routing-item alt">
-                                    <span class="routing-icon">🏥</span>
-                                    <div>
-                                        <div class="routing-name">St. Nicholas Hospital</div>
-                                        <div class="routing-meta">Emergency · 7 beds · 6.8 km away</div>
-                                    </div>
-                                    <div class="routing-eta">12 min</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Triage demo REMOVED -->
+        </div>
         </div>
     </section>
 
@@ -473,22 +432,46 @@
                         low-connectivity environments.</p>
                     <ul class="wa-features">
                         <li>
-                            <div class="wa-feat-icon">📱</div>
+                            <div class="wa-feat-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="5" y="2" width="14" height="20" rx="2" />
+                                    <line x1="12" y1="18" x2="12.01" y2="18" />
+                                </svg>
+                            </div>
                             <div><strong data-i18n="wa.feat1.strong">No download required</strong> — <span
                                     data-i18n="wa.feat1.rest">works on any basic smartphone with WhatsApp</span></div>
                         </li>
                         <li>
-                            <div class="wa-feat-icon">🗣️</div>
+                            <div class="wa-feat-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                                </svg>
+                            </div>
                             <div><strong data-i18n="wa.feat2.strong">Multilingual support</strong> — <span
                                     data-i18n="wa.feat2.rest">Swahili, Hausa, French, Yoruba &amp; more</span></div>
                         </li>
                         <li>
-                            <div class="wa-feat-icon">📶</div>
+                            <div class="wa-feat-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 6l5 3 5-6 5 6 5-3" />
+                                    <path d="M1 12l5 3 5-6 5 6 5-3" />
+                                    <path d="M1 18l5 3 5-6 5 6 5-3" />
+                                </svg>
+                            </div>
                             <div><strong data-i18n="wa.feat3.strong">Low-bandwidth optimized</strong> — <span
                                     data-i18n="wa.feat3.rest">works even with 2G connections</span></div>
                         </li>
                         <li>
-                            <div class="wa-feat-icon">⚡</div>
+                            <div class="wa-feat-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <polyline points="12 6 12 12 16 14" />
+                                </svg>
+                            </div>
                             <div><strong data-i18n="wa.feat4.strong">Instant AI triage</strong> — <span
                                     data-i18n="wa.feat4.rest">get a severity score and hospital recommendation in under
                                     60 seconds</span></div>
@@ -504,7 +487,7 @@
                 </div>
                 <div class="wa-visual">
                     <div class="wa-phone-frame">
-                        <img src="assets/whatsapp_preview.png" alt="PULSE AI WhatsApp AI Agent" />
+                        <img src="assets/whatsapp_phone.jpeg" alt="PULSE AI WhatsApp AI Agent" />
                         <div class="wa-phone-glow"></div>
                     </div>
                 </div>
@@ -599,30 +582,58 @@
                 making that a reality — one routing decision at a time.</p>
             <div class="vision-milestones">
                 <div class="milestone">
-                    <div class="milestone-icon">🌍</div>
+                    <div class="milestone-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="2" y1="12" x2="22" y2="12" />
+                            <path
+                                d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+                        </svg>
+                    </div>
                     <h4 data-i18n="vision.m1.title">Pan-African Reach</h4>
                     <p data-i18n="vision.m1.body">Deploy across 10 pilot cities in 5 countries by 2026</p>
                 </div>
                 <div class="milestone">
-                    <div class="milestone-icon">🏥</div>
+                    <div class="milestone-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                            <polyline points="9 22 9 12 15 12 15 22" />
+                        </svg>
+                    </div>
                     <h4 data-i18n="vision.m2.title">Hospital Network</h4>
                     <p data-i18n="vision.m2.body">Partner with 500+ public and private facilities</p>
                 </div>
                 <div class="milestone">
-                    <div class="milestone-icon">❤️</div>
+                    <div class="milestone-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+                        </svg>
+                    </div>
                     <h4 data-i18n="vision.m3.title">Lives Saved</h4>
                     <p data-i18n="vision.m3.body">Target 50,000+ lives improved through timely routing</p>
                 </div>
             </div>
             <div class="vision-ctas">
                 <a href="https://wa.me/22870653191" class="btn btn-hero-whatsapp" target="_blank">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
                         <path
                             d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
                     </svg>
                     <span data-i18n="vision.cta1">Start with WhatsApp</span>
                 </a>
-                <a href="#" class="btn btn-outline-white"><span data-i18n="vision.cta2">Partner with Us</span></a>
+                <a href="mailto:lightdjossou@hotmail.com" class="btn btn-outline-white">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" width="18" height="18">
+                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                    </svg>
+                    <span data-i18n="vision.cta2">Partner with Us</span>
+                </a>
             </div>
         </div>
     </section>
@@ -644,38 +655,59 @@
                     </a>
                     <p data-i18n="footer.brand">AI-powered healthcare coordination infrastructure built for Africa.
                         Routing patients to the right care before it's too late.</p>
+                    <div class="footer-contact">
+                        <a href="tel:+22870703111" class="footer-contact-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+                                <path
+                                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.59-.59a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z" />
+                            </svg>
+                            +228 70 70 31 11
+                        </a>
+                        <a href="https://www.linkedin.com/company/the-pulseai/" target="_blank"
+                            class="footer-contact-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+                                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
+                                <rect x="2" y="9" width="4" height="12" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg>
+                            LinkedIn
+                        </a>
+                    </div>
                 </div>
                 <div class="footer-links">
                     <div class="footer-col">
                         <h5 data-i18n="footer.col1.title">Product</h5>
                         <ul>
-                            <li><a href="#how-it-works" data-i18n="footer.col1.l1">How It Works</a></li>
-                            <li><a href="#whatsapp" data-i18n="footer.col1.l2">WhatsApp Agent</a></li>
-                            <li><a href="#dashboard" data-i18n="footer.col1.l3">Hospital Dashboard</a></li>
+                            <li><a href="https://pulseai-a0548.web.app/" target="_blank"
+                                    data-i18n="footer.col1.l1">PULSE AI Web App</a></li>
+                            <li><a href="https://wa.me/22870653191" target="_blank" data-i18n="footer.col1.l2">PULSE AI
+                                    WhatsApp</a></li>
+                            <li><a href="https://pulseai-hospitals.netlify.app/" target="_blank"
+                                    data-i18n="footer.col1.l3">Hospital Dashboard</a></li>
                         </ul>
                     </div>
                     <div class="footer-col">
                         <h5 data-i18n="footer.col2.title">Company</h5>
                         <ul>
                             <li><a href="#vision" data-i18n="footer.col2.l1">Our Vision</a></li>
-                            <li><a href="#" data-i18n="footer.col2.l2">About Us</a></li>
-                            <li><a href="#" data-i18n="footer.col2.l3">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h5 data-i18n="footer.col3.title">Get Access</h5>
-                        <ul>
-                            <li><a href="https://wa.me/22870653191" target="_blank" data-i18n="footer.col3.l1">WhatsApp
-                                    AI</a></li>
-                            <li><a href="#" data-i18n="footer.col3.l2">Web Platform</a></li>
-                            <li><a href="#" data-i18n="footer.col3.l3">Hospital Registration</a></li>
+                            <li><a href="mailto:lightdjossou@hotmail.com" data-i18n="footer.col2.l2">About 34AI</a></li>
+                            <li><a href="tel:+22870703111" data-i18n="footer.col2.l3">Contact</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p data-i18n="footer.copy">&copy; 2025 PULSE AI. AI-Powered Healthcare for Africa.</p>
-                <p data-i18n="footer.love">Made with ❤️ for African healthcare systems</p>
+                <p data-i18n="footer.love">Made with
+                    <svg viewBox="0 0 24 24" fill="#E53E3E" width="14" height="14"
+                        style="display:inline;vertical-align:middle">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+                    </svg>
+                    for African healthcare systems
+                </p>
             </div>
         </div>
     </footer>

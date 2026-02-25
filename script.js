@@ -133,19 +133,15 @@
       /* Footer */
       'footer.brand': "AI-powered healthcare coordination infrastructure built for Africa. Routing patients to the right care before it's too late.",
       'footer.col1.title': 'Product',
-      'footer.col1.l1': 'How It Works',
-      'footer.col1.l2': 'WhatsApp Agent',
+      'footer.col1.l1': 'PULSE AI Web App',
+      'footer.col1.l2': 'PULSE AI WhatsApp',
       'footer.col1.l3': 'Hospital Dashboard',
       'footer.col2.title': 'Company',
       'footer.col2.l1': 'Our Vision',
-      'footer.col2.l2': 'About Us',
+      'footer.col2.l2': 'About 34AI',
       'footer.col2.l3': 'Contact',
-      'footer.col3.title': 'Get Access',
-      'footer.col3.l1': 'WhatsApp AI',
-      'footer.col3.l2': 'Web Platform',
-      'footer.col3.l3': 'Hospital Registration',
       'footer.copy': '© 2025 PULSE AI. AI-Powered Healthcare for Africa.',
-      'footer.love': 'Made with ❤️ for African healthcare systems',
+      'footer.love': 'Made with love for African healthcare systems',
     },
 
     /* ────────────── FRENCH ────────────── */
@@ -268,21 +264,17 @@
       'vision.cta2': 'Devenir Partenaire',
 
       /* Footer */
-      'footer.brand': 'Infrastructure de coordination des soins de santé propulsée par l\'IA, construite pour l\'Afrique. Orienter les patients vers les bons soins avant qu\'il ne soit trop tard.',
+      'footer.brand': 'Infrastructure de coordination des soins propuls\u00e9e par l\'IA, construite pour l\'Afrique.',
       'footer.col1.title': 'Produit',
-      'footer.col1.l1': 'Comment ça marche',
-      'footer.col1.l2': 'Agent WhatsApp',
+      'footer.col1.l1': 'PULSE AI Web App',
+      'footer.col1.l2': 'PULSE AI WhatsApp',
       'footer.col1.l3': 'Tableau de bord hospitalier',
       'footer.col2.title': 'Entreprise',
       'footer.col2.l1': 'Notre Vision',
-      'footer.col2.l2': 'À propos',
+      'footer.col2.l2': '\u00c0 propos de 34AI',
       'footer.col2.l3': 'Contact',
-      'footer.col3.title': 'Accès',
-      'footer.col3.l1': 'IA WhatsApp',
-      'footer.col3.l2': 'Plateforme Web',
-      'footer.col3.l3': 'Inscription Hospitalière',
-      'footer.copy': '© 2025 PULSE AI. Soins de Santé IA pour l\'Afrique.',
-      'footer.love': 'Fait avec ❤️ pour les systèmes de santé africains',
+      'footer.copy': '\u00a9 2025 PULSE AI. Soins de Sant\u00e9 IA pour l\'Afrique.',
+      'footer.love': 'Fait avec amour pour les syst\u00e8mes de sant\u00e9 africains',
     }
   };
 
@@ -321,40 +313,36 @@
   applyLanguage(currentLang);
 
   /* ══════════════════════════════
-     3. THEME SYSTEM (dark / light)
+     3. THEME — light only (toggle removed)
   ══════════════════════════════ */
-  const htmlEl = document.documentElement;
-  let currentTheme = localStorage.getItem('pulse-theme') || 'dark';
-
-  function applyTheme(theme) {
-    currentTheme = theme;
-    htmlEl.setAttribute('data-theme', theme);
-    localStorage.setItem('pulse-theme', theme);
-  }
-
-  document.getElementById('themeToggle').addEventListener('click', () => {
-    applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
-  });
-
-  applyTheme(currentTheme);
+  // Theme toggle removed from UI; page always uses light mode.
+  document.documentElement.removeAttribute('data-theme');
+  localStorage.removeItem('pulse-theme');
 
   /* ══════════════════════════════
-     4. NAVBAR — SCROLL + HAMBURGER
+     4. NAVBAR — SCROLL + MOBILE MENU
   ══════════════════════════════ */
   const navbar = document.getElementById('navbar');
   const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
+  const mobileMenu = document.getElementById('mobileMenu');
 
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
 
   hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
-    hamburger.setAttribute('aria-expanded', navLinks.classList.contains('open'));
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
   });
-  navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => navLinks.classList.remove('open'));
+
+  // Close on nav link click
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
   });
 
   /* ══════════════════════════════
@@ -427,51 +415,12 @@
   });
 
   /* ══════════════════════════════
-     9. TRIAGE DEMO ROTATION
+     9. TRIAGE DEMO — removed
   ══════════════════════════════ */
-  const triageData = {
-    en: [
-      { text: '"Severe chest pain, difficulty breathing, sweating..."', sev: '⚡ CRITICAL', name: 'Lagos University Teaching Hospital', meta: 'Cardiology · 2 beds · 4.2 km', eta: '8 min' },
-      { text: '"High fever, stiff neck, sensitivity to light for 2 days..."', sev: '🔴 URGENT', name: 'Korle Bu Teaching Hospital', meta: 'Neurology · 4 beds · 2.8 km', eta: '6 min' },
-      { text: '"Sudden weakness on left side, slurred speech..."', sev: '⚡ CRITICAL', name: 'Muhimbili National Hospital', meta: 'Neurology · 1 bed · 5.1 km', eta: '10 min' },
-      { text: '"Abdominal pain, vomiting, unable to keep fluids down..."', sev: '🟠 HIGH', name: 'Chris Hani Baragwanath Hospital', meta: 'General · 6 beds · 3.9 km', eta: '7 min' },
-    ],
-    fr: [
-      { text: '"Douleur thoracique sévère, difficultés respiratoires..."', sev: '⚡ CRITIQUE', name: 'Hôpital Général de Référence de Kinshasa', meta: 'Cardiologie · 2 lits · 4.2 km', eta: '8 min' },
-      { text: '"Forte fièvre, nuque raide, sensibilité à la lumière..."', sev: '🔴 URGENT', name: 'Hôpital Korle Bu', meta: 'Neurologie · 4 lits · 2.8 km', eta: '6 min' },
-      { text: '"Faiblesse soudaine du côté gauche, élocution difficile..."', sev: '⚡ CRITIQUE', name: 'Hôpital National Muhimbili', meta: 'Neurologie · 1 lit · 5.1 km', eta: '10 min' },
-      { text: '"Douleurs abdominales, vomissements persistants..."', sev: '🟠 ÉLEVÉ', name: 'Hôpital Chris Hani Baragwanath', meta: 'Général · 6 lits · 3.9 km', eta: '7 min' },
-    ]
-  };
-
-  let triageIdx = 0;
-  const triageTextEl = document.getElementById('triageText');
-  const sevBadgeEl = document.querySelector('.severity-badge');
-  const routingPrimEl = document.querySelector('.routing-item:first-of-type');
-
-  function rotateTriage() {
-    if (!triageTextEl) return;
-    const data = triageData[currentLang] || triageData.en;
-    triageIdx = (triageIdx + 1) % data.length;
-    const row = data[triageIdx];
-
-    triageTextEl.style.opacity = '0';
-    setTimeout(() => {
-      triageTextEl.textContent = row.text;
-      if (sevBadgeEl) sevBadgeEl.textContent = row.sev;
-      if (routingPrimEl) {
-        routingPrimEl.querySelector('.routing-name').textContent = row.name;
-        routingPrimEl.querySelector('.routing-meta').textContent = row.meta;
-        routingPrimEl.querySelector('.routing-eta').textContent = row.eta;
-      }
-      triageTextEl.style.opacity = '1';
-    }, 350);
-  }
-  triageTextEl && (triageTextEl.style.transition = 'opacity 0.35s ease');
-  setInterval(rotateTriage, 4000);
+  // triage demo section removed from HTML; rotation disabled.
 
   /* ══════════════════════════════
      10. DX LOG
   ══════════════════════════════ */
-  console.log('%c PULSE AI 🌍 | Lang: EN/FR | Theme: dark/light', 'color:#00C9B4;font-size:14px;font-weight:bold;');
+  console.log('%c PULSE AI 🌍 | Lang: EN/FR | Light Mode | by 34AI', 'color:#00C9B4;font-size:14px;font-weight:bold;');
 })();
